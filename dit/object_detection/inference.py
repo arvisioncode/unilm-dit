@@ -222,9 +222,9 @@ def main():
     remove_box_lower_than(output, 0.30)
     output = sort(output)
 
-    boxes = output.to("cpu").pred_boxes if output.to("cpu").has("pred_boxes") else None
-    scores = output.to("cpu").scores if output.to("cpu").has("scores") else None
-    classes = output.to("cpu").pred_classes.tolist() if output.to("cpu").has("pred_classes") else None
+    boxes = output.to(device).pred_boxes if output.to(device).has("pred_boxes") else None
+    scores = output.to(device).scores if output.to(device).has("scores") else None
+    classes = output.to(device).pred_classes.tolist() if output.to(device).has("pred_classes") else None
     class_list = ["text", "title", "list", "table", "figure"]
 
     result = []
@@ -245,7 +245,7 @@ def main():
     #                 md,
     #                 scale=1.0,
     #                 instance_mode=ColorMode.SEGMENTATION)
-    # result = v.draw_instance_predictions(output.to("cpu"))
+    # result = v.draw_instance_predictions(output.to(device))
     # result_image = result.get_image()[:, :, ::-1]
 
     # # step 6: save
